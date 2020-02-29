@@ -30,7 +30,7 @@ namespace SAOD
                     stack.Peek();
                     stack.Pop();
                 }
-               // Console.WriteLine(stack.Count);
+                // Console.WriteLine(stack.Count);
                 watch.Stop();
                 AllTime += watch.ElapsedMilliseconds;
             }
@@ -52,18 +52,20 @@ namespace SAOD
             Console.ReadKey();
         }
 
-        private static int Priority(char c) =>
-            c switch
+        private static int Priority(char c)
+        {
+            int a = 0;
+            switch (c)
             {
-                '^' => 3,
-                '*' => 2,
-                '/' => 2,
-                '+' => 1,
-                '-' => 1,
-                '(' => 0,
-                ')' => 0,
-                _ => throw new ArgumentException("Meow")
-            };
+                case '^': a = 3; break;
+                case '*': a = 2; break;
+                case '/': a = 2; break;
+                case '+': a = 1; break;
+                case '-': a = 1; break;
+            }
+            return a;
+        }
+    
 
         private static void ReversePolish(string sample)
         {
