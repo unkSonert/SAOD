@@ -10,7 +10,7 @@ namespace SAOD
 
         static void Main(string[] args)
         {
-            var n = 100000000;
+            var n = 100;
 
             var AllTime = 0L;
             var stack = new MyStack<int>(4, 2);
@@ -24,16 +24,17 @@ namespace SAOD
                 {
                     stack.Push(i);
                 }
-                //Console.WriteLine(stack.Count);
+                
                 for (var i = 0; i != n; ++i)
                 {
                     stack.Peek();
                     stack.Pop();
                 }
-                // Console.WriteLine(stack.Count);
+                
                 watch.Stop();
                 AllTime += watch.ElapsedMilliseconds;
             }
+            
             Console.WriteLine(AllTime / 50);
 
             while (SonertTop)
@@ -65,7 +66,6 @@ namespace SAOD
             }
             return a;
         }
-    
 
         private static void ReversePolish(string sample)
         {
@@ -114,10 +114,11 @@ namespace SAOD
                             }
                     }
             }
-
+            
             while (!stack.Empty())
             {
                 result += $" {stack.Peek()}";
+
                 stack.Pop();
             }
 
