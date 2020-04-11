@@ -16,111 +16,25 @@ namespace List
             for (int i = 0; i < 10; ++i) 
                 test.PushBack(i);
 
+            test.Insert(4, 228);
+            test.Insert(6, 228);
+            test.Insert(0, 228);
+            test.Insert(1, 228);
+            test.Insert(100, 228, true);
+
             foreach (var iter in test)
             {
-                foreach(var iter2 in test)
-                {
-                    Console.WriteLine("magic: " + iter2);
-                }
-                Console.WriteLine("no magic: " + iter);
+                Console.WriteLine(iter);
             }
+
+            test.Remove(228, true);
+
+            foreach (var iter in test)
+            {
+                Console.WriteLine(iter);
+            }
+
             Console.ReadKey();
-        }
-    }
-
-    class DoubleLinkedNode<T>
-    {
-        private T value;
-
-        private DoubleLinkedNode<T> next;
-        private DoubleLinkedNode<T> prev;
-
-        public DoubleLinkedNode(T value, DoubleLinkedNode<T> next = null, DoubleLinkedNode<T> prev = null)
-        {
-            this.value = value;
-            this.next = next;
-            this.prev = prev;
-        }
-
-        public void LinkToNext(DoubleLinkedNode<T> nextLink)
-        {
-            if (next != null)
-                next.prev = nextLink;
-
-            next = nextLink;
-        }
-
-        public void LinkToPrev(DoubleLinkedNode<T> prevLink)
-        {
-            if (prev != null)
-                prev.next = prevLink;
-
-            prev = prevLink;
-        }
-
-        public T GetValue() => value;
-
-        public DoubleLinkedNode<T> GetNext() => next;
-        public DoubleLinkedNode<T> GetPrev() => prev;
-    }
-
-    class DoubleLinkedList<T> : IEnumerator<T>, IEnumerable
-    {
-        private DoubleLinkedNode<T> first;
-        private DoubleLinkedNode<T> last;
-        private DoubleLinkedNode<T> enumerable;
-
-        public T Current => enumerable.GetValue();
-
-        object IEnumerator.Current => enumerable.GetValue();
-
-        public void PushFront(T toPush)
-        {
-            if (first == null)
-            {
-                first = new DoubleLinkedNode<T>(toPush);
-                last = first;
-                enumerable = first;
-                return;
-            }
-
-            first.LinkToPrev(new DoubleLinkedNode<T>(toPush));
-            first = first.GetPrev();
-        }
-
-        public void PushBack(T toPush)
-        {
-            if (last == null)
-            {
-                first = new DoubleLinkedNode<T>(toPush);
-                last = first;
-                enumerable = first;
-                return;
-            }
-
-            last.LinkToNext(new DoubleLinkedNode<T>(toPush));
-            last = last.GetNext();
-        }
-
-        public void Dispose()
-        {
-            enumerable = null;
-        }
-
-        public bool MoveNext()
-        {
-            enumerable = enumerable.GetNext();
-            return enumerable != null;
-        }
-
-        public void Reset()
-        {
-            enumerable = first;
-        }
-
-        public IEnumerator GetEnumerator()
-        {
-            return (IEnumerator)MemberwiseClone();
         }
     }
 }
