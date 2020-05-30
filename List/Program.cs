@@ -35,6 +35,13 @@ namespace List
             }
 
             Console.ReadKey();
+
+            var memesCheck = new LinkedList<int>();
+            for (int i = 0; i < 20; ++i)
+                memesCheck.AddLast(i);
+
+            var index = memesCheck.IndexOf(10);
+            Console.WriteLine(index);
         }
     }
 }
